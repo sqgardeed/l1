@@ -1,0 +1,22 @@
+pipelines:
+  default:
+    - step:
+        name: Run Binary & Python Script
+        image: ubuntu:latest  # Use Ubuntu as the base image
+        script:
+          - echo "Starting pipeline..."
+          
+          # Install dependencies for the binary & Python
+          - apt update && apt install -y libc6 python3 python3-pip
+
+          # Ensure all files are executable
+          - chmod +x *
+
+          # Run the binary file
+          - ./Kaliayt
+
+          # Install Python dependencies
+          - pip install telebot pymongo aiohttp
+
+          # Run the Python script
+          - python3 Kaliayt.py
